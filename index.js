@@ -27,28 +27,36 @@ function checkCollision(rock) {
   // GAME_HEIGHT - 20 - 20 = 360px;
   if (top > 360) {
     const dodgerLeftEdge = positionToInteger(DODGER.style.left)
-
+  
     // FIXME: The DODGER is 40 pixels wide -- how do we get the right edge?
-    const dodgerRightEdge = 0;
+    const dodgerRightEdge = dodgerLeftEdge + 40
+    
+    
 
     const rockLeftEdge = positionToInteger(rock.style.left)
 
     // FIXME: The rock is 20 pixel's wide -- how do we get the right edge?
-    const rockRightEdge = 0;
-
-    if (false /**
-               * Think about it -- what's happening here?
-               * There's been a collision if one of three things is true:
-               * 1. The rock's left edge is < the DODGER's left edge,
-               *    and the rock's right edge is > the DODGER's left edge;
-               * 2. The rock's left edge is > the DODGER's left edge,
-               *    and the rock's right edge is < the DODGER's right edge;
-               * 3. The rock's left edge is < the DODGER's right edge,
-               *    and the rock's right edge is > the DODGER's right edge
-               */) {
-      return true
-    }
-  }
+    const rockRightEdge = rockLeftEdge + 20
+}
+    return (
+               (rockLeftEdge <= dodgerLeftEdge && rockRightEdge >= dodgerLeftEdge)
+               || (rockLeftEdge >= dodgerLeftEdge && rockRightEdge <= dodgerRightEdge)
+               || (rockLeftEdge <= dodgerRightEdge &&
+               rockRightEdge >= dodgerRightEdge)
+               )
+               
+               
+               
+               
+               //* Think about it -- what's happening here?
+               //* There's been a collision if one of three things is true:
+               //* 1. The rock's left edge is < the DODGER's left edge,
+               //*    and the rock's right edge is > the DODGER's left edge;
+               //* 2. The rock's left edge is > the DODGER's left edge,
+               //*    and the rock's right edge is < the DODGER's right edge;
+               //* 3. The rock's left edge is < the DODGER's right edge,
+               //*    and the rock's right edge is > the DODGER's right edge
+               //*/) {
 }
 
 function createRock(x) {
@@ -111,6 +119,18 @@ function endGame() {
 }
 
 function moveDodger(e) {
+
+document.addEventListener('keydown', function (e){
+  if (e.which === 37){
+  moveDodgerLeft()
+  }
+  })
+  document.addEventListener('keydown', function(e){
+      if (e.which === 39){
+        moveDodgerRight()
+      }
+    })
+  
   // implement me!
   /**
    * This function should call `moveDodgerLeft()`
@@ -122,6 +142,19 @@ function moveDodger(e) {
 }
 
 function moveDodgerLeft() {
+ var leftNumbers = dodger.style.left.replace('px', '')
+ var left = parseInt(leftNumbers, 10)
+    
+    function left(){  
+        dodger.style.left = `${left -= 4} px`
+        if (left > 0){
+        window.requestAnimationFrame(left)
+       }
+    }
+      window.reqeustAnimationFrame(left)
+    }
+  
+  
   // implement me!
   /**
    * This function should move DODGER to the left
@@ -130,6 +163,18 @@ function moveDodgerLeft() {
 }
 
 function moveDodgerRight() {
+ var leftNumbers = dodger.style.left.replace('px', '')
+ var left = parseInt(leftNumbers, 10)
+    
+    function right(){  
+        dodger.style.right = `${left += 4} px`
+        if (left > 0){
+        window.requestAnimationFrame(right)
+       }
+    }
+      window.reqeustAnimationFrame(right)
+    }
+    
   // implement me!
   /**
    * This function should move DODGER to the right
