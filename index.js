@@ -128,7 +128,7 @@ function createRock(x) {
  */
 function endGame() {
   clearInterval(gameInterval)
-  delete.ROCKS
+  delete ROCKS
   alert ("YOU LOSE!")
 }
 
